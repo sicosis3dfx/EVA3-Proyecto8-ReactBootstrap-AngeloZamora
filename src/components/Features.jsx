@@ -11,35 +11,37 @@ const MENU_PIZZAS = [
   {
     categoria: "Especialidades",
     pizzas: [
-      { id: 3, nombre: "PizzaItalia Suprema", precio: "$11.990", desc: "Jamón serrano, rúcula fresca, lascas de parmesano madurado y reducción de balsámico.", icon: "🇮🇹" },
+      { id: 3, nombre: "PizzaItalia Suprema", precio: "$11.990", desc: "Jamón serrano, rúcula fresca, lascas de parmesano madurado y reducción de balsámico.", icon: "👨‍🍳" },
       { id: 4, nombre: "Cuatro Quesos", precio: "$10.990", desc: "Mezcla perfecta de Mozzarella, Gorgonzola, Parmesano y Ricotta cremosa.", icon: "🧀" }
     ]
   }
 ]
 
 const IMAGENES_CARRUSEL = [
-  "https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=600&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?q=80&w=600&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?q=80&w=600&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?q=80&w=600&auto=format&fit=crop"
+  "/img/photo-1513104890138-7c749659a591.jpg",
+  "/img/photo-1534308983496-4fabb1a015ee.jpg",
+  "/img/photo-1534564883496-4faaa1c017he.jpg",
+  "/img/photo-1574071318508-1cdbab80d002.jpg",
+  "/img/photo-1593560708920-61dd98c46a4e.jpg",
+  "/img/photo-1593560778950-61dd98c46a4e.jpg"
 ]
 
 export default function Features({ agregarAlCarrito, setPizzaSeleccionada }) {
   const [categoriaActiva, setCategoriaActiva] = useState(0)
   const [fotoActiva, setFotoActiva] = useState(0)
-  const [fadeState, setFadeState] = useState('fade-in') // Controla el estado visual de la opacidad
+  const [isFading, setIsFading] = useState(false) // Estado para el efecto de suavizado
   
   const [formData, setFormData] = useState({ nombre: '', personas: '2', fecha: '' })
   const [error, setError] = useState('')
   const [exito, setExito] = useState(false)
 
-  // Función unificada que maneja el parpadeo de difuminado
+  // Función con efecto de difuminado (Fade) controlado por milisegundos
   const cambiarImagenConEfecto = (nuevoIndice) => {
-    setFadeState('fade-out')
+    setIsFading(true) // Apagamos la imagen
     setTimeout(() => {
       setFotoActiva(nuevoIndice)
-      setFadeState('fade-in')
-    }, 200) // Tiempo exacto que dura la salida de opacidad
+      setIsFading(false) // Encendemos la nueva imagen con transición
+    }, 250) // Tiempo del difuminado
   }
 
   const siguienteFoto = () => {
@@ -52,13 +54,11 @@ export default function Features({ agregarAlCarrito, setPizzaSeleccionada }) {
     cambiarImagenConEfecto(anterior)
   }
 
-  // ===== AUTOMATIZACIÓN: Avanzar solito cada 4 segundos =====
+  // Carrusel automático que avanza solito cada 4 segundos
   useEffect(() => {
     const intervalo = setInterval(() => {
       siguienteFoto()
     }, 4000)
-
-    // Limpieza obligatoria del ciclo de vida para evitar fugas de memoria
     return () => clearInterval(intervalo)
   }, [fotoActiva])
 
@@ -102,35 +102,51 @@ export default function Features({ agregarAlCarrito, setPizzaSeleccionada }) {
     <section id='features' className='features'>
       <div className='features-container'>
         
-        {/* ===== CARRUSEL INTERACTIVO AUTOMATIZADO ===== */}
+        {/* ===== GALERÍA INTERACTIVA BLINDADA CON ESTILOS INLINE ===== */}
         <p className='section-eyebrow'>Galería Artesanal</p>
         <h2 className='section-title' style={{ marginBottom: '2rem' }}>Nuestras Especialidades en el Horno</h2>
         
-        <div className="carrusel-wrapper">
-          {/* Botones de navegación integrados y estilizados a los lados */}
-          <button className="carrusel-btn btn-izq" onClick={anteriorFoto} aria-label="Anterior">
-            <i className="bi bi-chevron-left"></i>
+        {/* Contenedor relativo del carrusel */}
+        <div style={{ position: 'relative', maxWidth: '650px', margin: '0 auto', borderRadius: '14px', overflow: 'hidden', boxShadow: '0 20px 40px rgba(0, 0, 0, 0.6)' }}>
+          
+          {/* BOTÓN IZQUIERDO: Forzado matemáticamente a la izquierda usando texto Unicode puro */}
+          <button 
+            type="button" 
+            onClick={anteriorFoto} 
+            style={{ position: 'absolute', top: '50%', transform: 'translateY(-50%)', left: '16px', background: 'rgba(17, 17, 22, 0.6)', backdropFilter: 'blur(4px)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff', width: '44px', height: '44px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', cursor: 'pointer', zIndex: 10, transition: 'all 0.2s' }}
+            onMouseOver={(e) => e.currentTarget.style.background = 'var(--accent)'}
+            onMouseOut={(e) => e.currentTarget.style.background = 'rgba(17, 17, 22, 0.6)'}
+          >
+            &#10094;
           </button>
           
-          <div className="carrusel-slide">
+          {/* Slider contenedor de la imagen */}
+          <div style={{ width: '100%', height: '350px', background: '#0b0a0a' }}>
             <img 
               src={IMAGENES_CARRUSEL[fotoActiva]} 
               alt="Pizza Especialidad" 
-              className={`carrusel-img ${fadeState}`} 
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'opacity 0.25s ease-in-out', opacity: isFading ? 0 : 1 }} 
             />
           </div>
           
-          <button className="carrusel-btn btn-der" onClick={siguienteFoto} aria-label="Siguiente">
-            <i className="bi bi-chevron-right"></i>
+          {/* BOTÓN DERECHO: Forzado matemáticamente a la derecha usando texto Unicode puro */}
+          <button 
+            type="button" 
+            onClick={siguienteFoto} 
+            style={{ position: 'absolute', top: '50%', transform: 'translateY(-50%)', right: '16px', background: 'rgba(17, 17, 22, 0.6)', backdropFilter: 'blur(4px)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff', width: '44px', height: '44px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', cursor: 'pointer', zIndex: 10, transition: 'all 0.2s' }}
+            onMouseOver={(e) => e.currentTarget.style.background = 'var(--accent)'}
+            onMouseOut={(e) => e.currentTarget.style.background = 'rgba(17, 17, 22, 0.6)'}
+          >
+            &#10095;
           </button>
           
-          {/* Puntitos de selección inferiores */}
-          <div className="carrusel-indicadores">
+          {/* PUNTITOS DE SELECCIÓN INFERIORES */}
+          <div style={{ position: 'absolute', bottom: '16px', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '0.6rem', zIndex: 10, background: 'rgba(0, 0, 0, 0.5)', backdropFilter: 'blur(6px)', padding: '0.45rem 0.9rem', borderRadius: '20px' }}>
             {IMAGENES_CARRUSEL.map((_, idx) => (
               <span 
                 key={idx} 
-                className={`indicador-dot ${fotoActiva === idx ? 'active' : ''}`}
                 onClick={() => cambiarImagenConEfecto(idx)}
+                style={{ width: '8px', height: '8px', borderRadius: '50%', background: fotoActiva === idx ? 'var(--accent)' : 'rgba(255, 255, 255, 0.35)', transform: fotoActiva === idx ? 'scale(1.25)' : 'scale(1)', cursor: 'pointer', transition: 'all 0.2s' }}
               />
             ))}
           </div>
