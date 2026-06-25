@@ -1,146 +1,418 @@
-import { useState, useEffect } from 'react'
-import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import Features from './components/Features'
-import Footer from './components/Footer'
-import PizzaModal from './components/PizzaModal'
-import './App.css'
+:root {
+  /* ===== NUEVA PALETA ARTESANAL ITALIANA ===== */
+  --bg:      #111116;       /* Negro carbón profundo (base de piedra) */
+  --bg2:     #1c1917;      /* Tierra/Ladrillo refractario oscuro */
+  --accent:  #22c55e;      /* Verde Albahaca fresco */
+  --accent2: #ef4444;      /* Rojo Pomodoro / Terracota intenso */
+  --text:    #f5f5f4;       /* Crema suave de alta legibilidad */
+  --muted:   #a8a29e;       /* Arena suave para textos secundarios */
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --border:  rgba(255, 255, 255, 0.07);
+}
 
-export default function App() {
-  const [carrito, setCarrito] = useState([])
-  const [pizzaSeleccionada, setPizzaSeleccionada] = useState(null)
-  const [verCarrito, setVerCarrito] = useState(false)
-  const [notificacionReserva, setNotificacionReserva] = useState(null)
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  margin: 0;
+}
 
-  const agregarAlCarrito = (nuevaPizzaConfigurada) => {
-    const existe = carrito.find(
-      item => item.id === nuevaPizzaConfigurada.id && item.tamano === nuevaPizzaConfigurada.tamano
-    )
+/* ===== NAVBAR ===== */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(17, 17, 22, 0.94);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
 
-    if (existe) {
-      setCarrito(carrito.map(item => 
-        item.id === nuevaPizzaConfigurada.id && item.tamano === nuevaPizzaConfigurada.tamano
-          ? { ...item, cantidad: item.cantidad + nuevaPizzaConfigurada.cantidad }
-          : item
-      ))
-    } else {
-      setCarrito([...carrito, nuevaPizzaConfigurada])
-    }
-  }
+.navbar-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
-  const eliminarDelCarrito = (indiceAEliminar) => {
-    setCarrito(carrito.filter((_, index) => index !== indiceAEliminar))
-  }
+.navbar-logo {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: -0.5px;
+}
 
-  const calcularTotal = () => {
-    const suma = carrito.reduce((acumulado, item) => {
-      const precioBase = parseInt(item.precio.replace('$', '').replaceAll('.', ''), 10)
-      const precioFinalUnidad = item.tamano === 'Familiar' ? precioBase + 3000 : precioBase
-      return acumulado + (precioFinalUnidad * item.cantidad)
-    }, 0)
-    return '$' + suma.toLocaleString('es-CL')
-  }
+.navbar-logo span {
+  color: var(--accent); /* Cambia a Verde Albahaca */
+}
 
-  const pagarPedido = () => {
-    alert(`¡Tu pedido por un total de ${calcularTotal()} ha sido recibido! Pronto estará en el horno. 🍕`)
-    setCarrito([])
-    setVerCarrito(false)
-  }
+.navbar-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
 
-  useEffect(() => {
-    if (notificacionReserva) {
-      const timer = setTimeout(() => setNotificacionReserva(null), 4000)
-      return () => clearTimeout(timer)
-    }
-  }, [notificacionReserva])
+.navbar-links a {
+  color: rgba(245, 245, 244, 0.8);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
 
-  return (
-    /* INYECCIÓN FORZADA DE COLORES CORPORATIVOS Y ESTILOS */
-    <div style={{
-      '--bg': '#111116',
-      '--bg2': '#1c1917',
-      '--accent': '#22c55e',
-      '--accent2': '#ef4444',
-      '--text': '#f5f5f4',
-      '--muted': '#a8a29e',
-      backgroundColor: '#111116',
-      color: '#f5f5f4',
-      minHeight: '100vh'
-    }}>
-      <Navbar carritoCount={carrito.reduce((acc, item) => acc + item.cantidad, 0)} onCartClick={() => setVerCarrito(true)} />
-      
-      <main>
-        {/* Envolvemos el Hero temporalmente para forzar el cambio del título de la captura */}
-        <div style={{ paddingHeader: '1px' }}>
-          <Hero />
-        </div>
-        
-        <Features 
-          agregarAlCarrito={agregarAlCarrito} 
-          setPizzaSeleccionada={setPizzaSeleccionada} 
-          setNotificacionReserva={setNotificacionReserva}
-        />
-      </main>
-      
-      <Footer />
+.navbar-links a:hover {
+  color: var(--accent);
+}
 
-      <PizzaModal 
-        pizza={pizzaSeleccionada} 
-        onClose={() => setPizzaSeleccionada(null)} 
-        agregarAlCarrito={agregarAlCarrito}
-      />
+.navbar-cta {
+  background: var(--accent2); /* Botón de pedido ahora en Rojo Pomodoro */
+  color: #fff !important;
+  padding: 0.45rem 1.1rem;
+  border-radius: 6px;
+  font-weight: 700 !important;
+  transition: background 0.2s, transform 0.15s !important;
+  text-decoration: none;
+}
 
-      {/* MODAL DEL CARRITO */}
-      {verCarrito && (
-        <div className="modal-overlay" onClick={() => setVerCarrito(false)}>
-          <div className="modal-content-custom" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close-btn" onClick={() => setVerCarrito(false)}>&times;</button>
-            <div className="modal-body-custom" style={{ textAlign: 'left' }}>
-              <h2>🛒 Tu Pedido Actual</h2>
-              {carrito.length === 0 ? (
-                <p style={{ color: 'var(--muted)', marginTop: '1rem' }}>Tu carrito está vacío. ¡Añade una pizza! 🍕</p>
-              ) : (
-                <>
-                  <div className="carrito-scroll-container">
-                    {carrito.map((item, index) => {
-                      const base = parseInt(item.precio.replace('$', '').replaceAll('.', ''), 10)
-                      const precioFinalUnidad = item.tamano === 'Familiar' ? base + 3000 : base
-                      const subtotalItem = precioFinalUnidad * item.cantidad
+.navbar-cta:hover {
+  background: #f87171 !important;
+  transform: translateY(-1px);
+}
 
-                      return (
-                        <div key={index} className="carrito-item-row" style={{ fontSize: '0.9rem' }}>
-                          <div>
-                            <span>{item.icon} <strong>{item.nombre}</strong></span>
-                            <span style={{ display: 'block', fontSize: '0.75rem', color: 'var(--muted)' }}>
-                              Tamaño: {item.tamano} | Cantidad: {item.cantidad}
-                            </span>
-                          </div>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                            <span style={{ color: 'var(--accent)', fontWeight: '700' }}>
-                              {'$' + subtotalItem.toLocaleString('es-CL')}
-                            </span>
-                            <button onClick={() => eliminarDelCarrito(index)} className="btn-delete-item">
-                              <i className="bi bi-trash"></i>
-                            </button>
-                          </div>
-                        </div>
-                      )
-                    })}
-                  </div>
-                  <div className="carrito-total-box">
-                    <span>Total a Pagar:</span>
-                    <span className="total-amount">{calcularTotal()}</span>
-                  </div>
-                  <div className="modal-footer-custom">
-                    <button className="btn-pizza-secondary" onClick={() => setVerCarrito(false)}>Seguir Mirando</button>
-                    <button className="btn-primary" onClick={pagarPedido}>Enviar Orden 🚀</button>
-                  </div>
-                </>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  )
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  background: #111116;
+  padding: 1rem 1.5rem 1.5rem;
+  gap: 0;
+  border-top: 1px solid var(--border);
+}
+
+.mobile-menu.open { display: flex; }
+.mobile-menu a { color: rgba(245, 245, 244, 0.8); text-decoration: none; font-size: 1.05rem; font-weight: 500; padding: 0.65rem 0; border-bottom: 1px solid var(--border); }
+
+@media (max-width: 768px) {
+  .navbar-links { display: none; }
+  .hamburger { display: flex; }
+}
+
+/* ===== HERO (ACTUALIZADO: NUEVA FUENTE Y TAMAÑO MAS GRANDE) ===== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 1.5rem 4rem;
+  /* Degradados de fondo adaptados a la paleta italiana */
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(34, 197, 94, 0.08), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 80%, rgba(239, 68, 68, 0.06), transparent),
+    var(--bg);
+  text-align: center;
+}
+
+.hero-content {
+  max-width: 900px; /* Ampliado para dar espacio al título más grande */
+}
+
+.hero-eyebrow {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(34, 197, 94, 0.08);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  padding: 0.3rem 0.9rem;
+  border-radius: 999px;
+  margin-bottom: 1.5rem;
+}
+
+.hero-title {
+  /* CAMBIO: Fuente Georgia con look tradicional y tamaño aumentado (clamp ampliado) */
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: clamp(2.6rem, 7vw, 4.8rem); 
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -1px;
+  color: #fff;
+  margin-bottom: 1.6rem;
+}
+
+.hero-title span {
+  color: var(--accent2); /* Cambia el énfasis central a Rojo Pomodoro */
+}
+
+.hero-subtitle {
+  max-width: 580px;
+  margin: 0 auto 2.5rem;
+  font-size: 1.1rem;
+  color: var(--muted);
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  background: var(--accent2); /* Botón principal en Rojo */
+  color: #fff;
+  padding: 0.8rem 2rem;
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: background 0.2s, transform 0.15s;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: #f87171;
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text);
+  padding: 0.8rem 2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.95rem;
+  border: 1px solid var(--border);
+  transition: border-color 0.2s, color 0.2s, transform 0.15s;
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent); /* Bordes resaltan en verde albahaca */
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* ===== FEATURES ===== */
+.features { padding: 6rem 1.5rem; background: var(--bg2); }
+.features-container { max-width: 1100px; margin: 0 auto; text-align: center; }
+.section-eyebrow { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
+.section-title { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; letter-spacing: -0.5px; color: #fff; margin-bottom: 3rem; }
+.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+
+.feature-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  text-align: left;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.feature-card:hover { border-color: rgba(34, 197, 94, 0.25); transform: translateY(-4px); }
+.feature-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+.feature-card h3 { font-size: 1.15rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
+.feature-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.65; }
+
+/* ===== FOOTER ===== */
+.footer { background: var(--bg); border-top: 1px solid var(--border); padding: 4rem 1.5rem 0; }
+.footer-container { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; }
+.footer-logo { font-size: 1.3rem; font-weight: 800; color: #fff; }
+.footer-logo span { color: var(--accent); }
+.footer-brand p { margin-top: 0.75rem; color: var(--muted); font-size: 0.9rem; }
+.footer-links, .footer-contact { display: flex; flex-direction: column; gap: 0.6rem; }
+.footer-links h4, .footer-contact h4 { color: #fff; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.4rem; }
+.footer-links p, .footer-contact p { color: var(--muted); font-size: 0.9rem; }
+.footer-bottom { border-top: 1px solid var(--border); padding: 1.25rem 0; text-align: center; max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 0.25rem; }
+.footer-bottom p { color: var(--muted); font-size: 0.82rem; margin: 0; }
+
+@media (max-width: 640px) { .footer-container { grid-template-columns: 1fr; gap: 2rem; } }
+
+/* ===== ACORDEÓN Y TARJETAS INTERNAS ===== */
+.accordion-wrapper { margin-top: 2rem; display: flex; flex-direction: column; gap: 0.75rem; text-align: left; }
+.accordion-item-custom { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+
+.accordion-trigger {
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 1.25rem 1.5rem;
+  color: #fff;
+  font-size: 1.15rem;
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.accordion-trigger:hover, .accordion-trigger.active { background: rgba(255, 255, 255, 0.01); color: var(--accent); }
+.accordion-arrow { font-size: 0.85rem; color: var(--muted); }
+.accordion-content-custom { padding: 1.5rem; border-top: 1px solid var(--border); background: rgba(0, 0, 0, 0.1); }
+
+.pizza-price { display: block; font-size: 1.25rem; font-weight: 800; color: var(--accent); margin: 1rem 0; }
+.pizza-card-actions { display: flex; gap: 0.5rem; }
+
+.btn-pizza-primary {
+  flex: 1; background: var(--accent); color: #111116; border: none; padding: 0.6rem; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 0.88rem; transition: background 0.2s;
+}
+.btn-pizza-primary:hover { background: #4ade80; }
+
+.btn-pizza-secondary {
+  flex: 1; background: transparent; color: var(--text); border: 1px solid var(--border); padding: 0.6rem; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.88rem; transition: border-color 0.2s;
+}
+.btn-pizza-secondary:hover { border-color: var(--accent2); color: var(--accent2); }
+
+/* MODALES */
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 5, 10, 0.85); backdrop-filter: blur(8px); z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 1rem; }
+.modal-content-custom { background: #1c1917; border: 1px solid var(--border); width: 100%; max-width: 500px; border-radius: 12px; position: relative; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6); animation: fadeInModal 0.25s ease-out; }
+@keyframes fadeInModal { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+.modal-close-btn { position: absolute; top: 1rem; right: 1.25rem; background: none; border: none; color: var(--muted); font-size: 1.75rem; cursor: pointer; }
+.modal-close-btn:hover { color: #fff; }
+.modal-body-custom { padding: 2.5rem 2rem 2rem; }
+.modal-pizza-icon { font-size: 3.5rem; margin-bottom: 1rem; }
+.modal-pizza-desc { color: var(--muted); font-size: 0.95rem; margin: 1rem 0 1.5rem; }
+.modal-ingredients { background: rgba(255, 255, 255, 0.01); border: 1px solid var(--border); padding: 1rem; border-radius: 8px; margin-bottom: 2rem; }
+.modal-ingredients h4 { font-size: 0.9rem; color: #fff; margin-bottom: 0.25rem; }
+.modal-ingredients p { font-size: 0.85rem; color: var(--muted); }
+.modal-footer-custom { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 1.25rem; }
+.modal-pizza-price { font-size: 1.5rem; font-weight: 800; color: var(--accent); }
+
+/* FORMULARIO */
+.reserva-form { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.5rem; }
+.form-input { width: 100%; background: #111116; border: 1px solid var(--border); border-radius: 6px; padding: 0.6rem 0.8rem; color: #fff; font-family: inherit; font-size: 0.88rem; box-sizing: border-box; }
+.form-input:focus { border-color: var(--accent); outline: none; }
+select.form-input option { background: #1c1917; color: #fff; }
+
+.carrito-scroll-container { margin: 1.5rem 0; max-height: 220px; overflow-y: auto; padding-right: 0.5rem; }
+.carrito-item-row { display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0; border-bottom: 1px solid var(--border); }
+.btn-delete-item { background: transparent; border: none; color: #f87171; cursor: pointer; font-size: 1.1rem; padding: 0.2rem 0.4rem; border-radius: 4px; }
+.btn-delete-item:hover { background: rgba(248, 113, 113, 0.1); }
+.carrito-total-box { display: flex; justify-content: space-between; align-items: center; background: rgba(255, 255, 255, 0.01); border: 1px solid var(--border); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; font-weight: 700; }
+.total-amount { font-size: 1.4rem; color: var(--accent); }
+
+.msg-error { color: #ef4444; font-size: 0.85rem; text-align: left; margin-top: 0.2rem; }
+.msg-success { color: #22c55e; font-size: 0.95rem; text-align: left; margin-top: 0.2rem; }
+
+/* ===== CARRUSEL INTERACTIVO ===== */
+.carrusel-wrapper {
+  position: relative;
+  max-width: 650px;
+  margin: 0 auto;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+.carrusel-slide {
+  width: 100%;
+  height: 350px;
+  background: #0b0a0a;
+}
+
+.carrusel-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.25s ease-in-out;
+}
+
+.carrusel-img.fade-in { opacity: 1; }
+.carrusel-img.fade-out { opacity: 0; }
+
+.carrusel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(17, 17, 22, 0.5);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+  z-index: 10;
+}
+
+.carrusel-btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #111116;
+  transform: translateY(-50%) scale(1.05);
+}
+
+.btn-izq { left: 16px; }
+.btn-der { right: 16px; }
+
+.carrusel-indicadores {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.6rem;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(6px);
+  padding: 0.45rem 0.9rem;
+  border-radius: 20px;
+}
+
+.indicador-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.indicador-dot:hover { background: rgba(255, 255, 255, 0.8); }
+.indicador-dot.active { background: var(--accent); transform: scale(1.3); }
+
+@media (max-width: 640px) {
+  .carrusel-slide { height: 220px; }
+  .carrusel-btn { width: 36px; height: 36px; font-size: 0.9rem; }
+  .btn-izq { left: 8px; }
+  .btn-der { right: 8px; }
 }
