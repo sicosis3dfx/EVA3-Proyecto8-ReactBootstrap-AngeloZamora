@@ -31,7 +31,7 @@ export default function Features({ agregarAlCarrito, setPizzaSeleccionada }) {
   const [fotoActiva, setFotoActiva] = useState(0)
   const [isFading, setIsFading] = useState(false)
   
-  const [formData, setFormData] = useState({ nombre: '', personas: '2', fecha: '', hora: '' })
+  const [formData, setFormData] = useState({ nombre: '', personas: '2', fecha: '', hora: '', telefono: '' })
   const [error, setError] = useState('')
   const [exito, setExito] = useState(false)
 
@@ -62,22 +62,22 @@ export default function Features({ agregarAlCarrito, setPizzaSeleccionada }) {
 
   const handleReserva = (e) => {
     e.preventDefault()
-    if (!formData.nombre.trim() || !formData.fecha || !formData.hora) {
+    if (!formData.nombre.trim() || !formData.fecha || !formData.hora || !formData.telefono.trim()) {
       setError('Por favor, completa todos los campos obligatorios (*).')
       setExito(false)
       return
     }
 
-    const reglaSoloLetras = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/
-    if (!reglaSoloLetras.test(formData.nombre)) {
-      setError('El nombre no puede contener números ni caracteres especiales.')
+    const reglaTelefono = /^\d{9}$/
+    if (!reglaTelefono.test(formData.telefono.trim())) {
+      setError('El teléfono debe contener exactamente los 9 dígitos numéricos (ej: 9XXXXXXXX).')
       setExito(false)
       return
     }
     
     setError('')
     setExito(true)
-    setFormData({ nombre: '', personas: '2', fecha: '', hora: '' })
+    setFormData({ nombre: '', personas: '2', fecha: '', hora: '', telefono: '' })
   }
 
   return (
@@ -173,7 +173,7 @@ export default function Features({ agregarAlCarrito, setPizzaSeleccionada }) {
 
         <div style={{ marginTop: '5rem', maxWidth: '500px', marginLeft: 'auto', marginRight: 'auto', padding: '2rem', background: 'var(--card-bg)', border: '1px solid var(--border)', borderRadius: '12px' }}>
           <p className='section-eyebrow'>Planifica tu Visita</p>
-          <h3 style={{ color: '#fff', fontSize: '1.5rem', marginBottom: '1.5rem', fontWeight: '800' }}>📅 Reserva tu Mesa en Vivo</h3>
+          <h3 style={{ color: '#fff', fontSize: '1.5rem', marginBottom: '1.5rem', fontWeight: '800' }}>📅 Reserva tu Mesa</h3>
           
           <form onSubmit={handleReserva} className="reserva-form">
             <input 
@@ -183,6 +183,19 @@ export default function Features({ agregarAlCarrito, setPizzaSeleccionada }) {
               onChange={(e) => setFormData({...formData, nombre: e.target.value})}
               className="form-input"
             />
+
+            <div style={{ display: 'flex', alignItems: 'center', background: '#111116', border: '1px solid var(--border)', borderRadius: '6px', paddingLeft: '0.8rem', boxSizing: 'border-box' }}>
+              <span style={{ color: 'var(--muted)', fontSize: '0.88rem', userSelect: 'none', paddingRight: '0.2rem' }}>+56</span>
+              <input 
+                type="text" 
+                placeholder="9XXXXXXXX *" 
+                value={formData.telefono}
+                onChange={(e) => setFormData({...formData, telefono: e.target.value})}
+                className="form-input"
+                style={{ border: 'none', paddingLeft: '0.2rem', background: 'transparent' }}
+                maxLength={9}
+              />
+            </div>
             
             <div style={{ display: 'flex', gap: '0.6rem' }}>
               <input 
