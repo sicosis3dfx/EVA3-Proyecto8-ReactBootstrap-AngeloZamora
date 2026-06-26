@@ -126,7 +126,7 @@ body {
   .hamburger { display: flex; }
 }
 
-/* ===== HERO (ACTUALIZADO: FUENTE GORDITA EXTRA BOLD) ===== */
+/* ===== HERO ===== */
 .hero {
   min-height: 100vh;
   display: flex;
@@ -159,12 +159,11 @@ body {
 }
 
 .hero-title {
-  /* CAMBIO: Fuente ultra robusta y pesada ('Arial Black') con tamaño gigante e imponente */
   font-family: 'Arial Black', 'Arial Bold', Gadget, sans-serif;
   font-size: clamp(2.5rem, 7.5vw, 4.8rem); 
   font-weight: 950;
   line-height: 1.1;
-  letter-spacing: -2px; /* Junta las letras un pelo para que se vea más compacto y estético */
+  letter-spacing: -2px;
   color: #fff;
   margin-bottom: 1.6rem;
 }
@@ -309,11 +308,22 @@ body {
 .modal-footer-custom { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 1.25rem; }
 .modal-pizza-price { font-size: 1.5rem; font-weight: 800; color: var(--accent); }
 
-/* FORMULARIO */
+/* ===== FORMULARIO DE RESERVAS ===== */
 .reserva-form { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.5rem; }
 .form-input { width: 100%; background: #111116; border: 1px solid var(--border); border-radius: 6px; padding: 0.6rem 0.8rem; color: #fff; font-family: inherit; font-size: 0.88rem; box-sizing: border-box; }
 .form-input:focus { border-color: var(--accent); outline: none; }
 select.form-input option { background: #1c1917; color: #fff; }
+
+/* CORRECCIÓN EXCLUSIVA PARA EL ÍCONO DEL CALENDARIO NEGRO DE LA CAPTURA */
+.form-input[type="datetime-local"] {
+  color-scheme: dark; /* Fuerza al navegador a usar los controles claros nativos */
+}
+
+/* Selector para navegadores basados en Webkit (Chrome, Edge, Opera, Safari) */
+.form-input::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  filter: invert(0) brightness(100%); /* Invierte el color de negro a blanco puro */
+}
 
 .carrito-scroll-container { margin: 1.5rem 0; max-height: 220px; overflow-y: auto; padding-right: 0.5rem; }
 .carrito-item-row { display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0; border-bottom: 1px solid var(--border); }
