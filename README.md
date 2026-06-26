@@ -45,7 +45,7 @@ pnpm dev
 * **Estudiante:** Angelo Zamora
 * **Institución:** INACAP Sede Renca
 * **Asignatura:** Desarrollo Web Avanzado
-* **Fecha:** Junio 2026
+* **Fecha:** 02 de Julio 2026
 
 ## 🧰 Tecnologías Utilizadas
 
