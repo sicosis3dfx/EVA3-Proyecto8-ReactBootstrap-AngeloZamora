@@ -12,7 +12,7 @@ export default function Hero() {
                 </p>
                 <div className='hero-actions'>
                     {/* Estructura exacta del botón de video que mandó el profesor[cite: 4] */}
-                    <a href='https://youtu.be/A51XH7C8Xv0?si=4_nSOHdfl4H1Gg3j' className='btn-secondary' target='_blank' rel='noopener noreferrer'>Colaboración Especial</a>
+                    <a href='https://youtu.be/A51XH7C8Xv0?si=4_nSOHdfl4H1Gg3j' className='btn-secondary' target='_blank' rel='noopener noreferrer'>Colaboración Especial ¡HAZ CLICK!</a>
                     <a href='#features' className='btn-primary'>Ver Menú</a>
                     <a href='#footer' className='btn-secondary'>Reserva tu Mesa</a>
                 </div>

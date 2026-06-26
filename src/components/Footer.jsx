@@ -3,7 +3,11 @@ export default function Footer() {
     <footer id='footer' className='footer'>
       <div className='footer-container'>
         <div className='footer-brand'>
-          <span className='footer-logo'>Pizza<span>Italia</span></span>
+          <span className='footer-logo' style={{ fontStyle: 'normal' }}>
+          <span style={{ color: 'var(--accent)' }}>Pizza</span>
+          <span style={{ color: '#fff' }}>Ita</span>
+          <span style={{ color: 'var(--accent2)' }}>lia</span>
+        </span>
           <p>Auténtica tradición napolitana horneada a la piedra con pasión artesanal.</p>
         </div>
 
