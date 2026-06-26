@@ -381,7 +381,16 @@ body {
 .modal-ingredients { background: rgba(255, 255, 255, 0.01); border: 1px solid var(--border); padding: 1rem; border-radius: 8px; margin-bottom: 2rem; }
 .modal-ingredients h4 { font-size: 0.9rem; color: #fff; margin-bottom: 0.25rem; }
 .modal-ingredients p { font-size: 0.85rem; color: var(--muted); }
-.modal-footer-custom { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 1.25rem; }
+
+.modal-footer-custom { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  border-top: 1px solid var(--border); 
+  padding-top: 1.25rem; 
+  gap: 1rem;
+}
+
 .modal-pizza-price { font-size: 1.5rem; font-weight: 800; color: var(--accent); }
 
 .reserva-form { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.5rem; background: transparent !important; padding: 0 !important; border: none !important; }
