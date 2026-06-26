@@ -404,7 +404,7 @@ select.form-input option { background: #1c1917; color: #fff; }
 
 .form-input::-webkit-calendar-picker-indicator {
   cursor: pointer;
-  filter: invert(0) brightness(100%); 
+  filter: invert(1) brightness(100%); 
 }
 
 .carrito-scroll-container { margin: 1.5rem 0; max-height: 220px; overflow-y: auto; padding-right: 0.5rem; }

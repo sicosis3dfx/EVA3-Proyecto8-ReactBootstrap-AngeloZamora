@@ -31,7 +31,7 @@ export default function Features({ agregarAlCarrito, setPizzaSeleccionada }) {
   const [fotoActiva, setFotoActiva] = useState(0)
   const [isFading, setIsFading] = useState(false)
   
-  const [formData, setFormData] = useState({ nombre: '', personas: '2', fecha: '' })
+  const [formData, setFormData] = useState({ nombre: '', personas: '2', fecha: '', hora: '' })
   const [error, setError] = useState('')
   const [exito, setExito] = useState(false)
 
@@ -62,7 +62,7 @@ export default function Features({ agregarAlCarrito, setPizzaSeleccionada }) {
 
   const handleReserva = (e) => {
     e.preventDefault()
-    if (!formData.nombre.trim() || !formData.fecha) {
+    if (!formData.nombre.trim() || !formData.fecha || !formData.hora) {
       setError('Por favor, completa todos los campos obligatorios (*).')
       setExito(false)
       return
@@ -77,7 +77,7 @@ export default function Features({ agregarAlCarrito, setPizzaSeleccionada }) {
     
     setError('')
     setExito(true)
-    setFormData({ nombre: '', personas: '2', fecha: '' })
+    setFormData({ nombre: '', personas: '2', fecha: '', hora: '' })
   }
 
   return (
@@ -183,12 +183,24 @@ export default function Features({ agregarAlCarrito, setPizzaSeleccionada }) {
               onChange={(e) => setFormData({...formData, nombre: e.target.value})}
               className="form-input"
             />
-            <input 
-              type="datetime-local" 
-              value={formData.fecha}
-              onChange={(e) => setFormData({...formData, fecha: e.target.value})}
-              className="form-input"
-            />
+            
+            <div style={{ display: 'flex', gap: '0.6rem' }}>
+              <input 
+                type="date" 
+                value={formData.fecha}
+                onChange={(e) => setFormData({...formData, fecha: e.target.value})}
+                className="form-input"
+                style={{ flex: 1 }}
+              />
+              <input 
+                type="time" 
+                value={formData.hora}
+                onChange={(e) => setFormData({...formData, hora: e.target.value})}
+                className="form-input"
+                style={{ flex: 1 }}
+              />
+            </div>
+
             <select 
               value={formData.personas}
               onChange={(e) => setFormData({...formData, personas: e.target.value})}
