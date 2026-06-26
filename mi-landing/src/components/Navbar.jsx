@@ -7,8 +7,6 @@ export default function Navbar({ carritoCount, onCartClick }) {
   return (
     <nav className='navbar'>
       <div className='navbar-container'>
-        
-        {/* ===== LOGO ENLAZADO Y TRICOLOR (VERDE, BLANCO Y ROJO) ===== */}
         <a href='#hero' className='navbar-logo' style={{ textDecoration: 'none' }}>
           <span style={{ color: 'var(--accent)' }}>Pizza</span>
           <span style={{ color: '#fff' }}>Ita</span>

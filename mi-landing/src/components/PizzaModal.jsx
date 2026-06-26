@@ -4,7 +4,6 @@ export default function PizzaModal({ pizza, onClose, agregarAlCarrito }) {
   const [tamano, setTamano] = useState('Mediana')
   const [cantidad, setCantidad] = useState(1)
 
-  // Resetea los selectores cada vez que se abre una pizza diferente
   useEffect(() => {
     if (pizza) {
       setTamano('Mediana')
@@ -14,7 +13,6 @@ export default function PizzaModal({ pizza, onClose, agregarAlCarrito }) {
 
   if (!pizza) return null 
 
-  // Cálculo visual de precios dentro del modal
   const baseNum = parseInt(pizza.precio.replace('$', '').replaceAll('.', ''), 10)
   const precioActualUnidad = tamano === 'Familiar' ? baseNum + 3000 : baseNum
   const precioTotalModal = precioActualUnidad * cantidad
@@ -36,7 +34,6 @@ export default function PizzaModal({ pizza, onClose, agregarAlCarrito }) {
             <p>Masa madre madurada por 48 horas bajo frío controlado, estirada a mano, salsa de tomates italianos San Marzano y horneado a la piedra a 450°C.</p>
           </div>
 
-          {/* ===== NUEVA OPCIÓN: SELECCIÓN DE TAMAÑO ===== */}
           <div style={{ marginBottom: '1.25rem' }}>
             <h4 style={{ color: '#fff', fontSize: '0.9rem', marginBottom: '0.4rem' }}>📏 Elige el Tamaño:</h4>
             <div style={{ display: 'flex', gap: '1rem' }}>
@@ -51,7 +48,6 @@ export default function PizzaModal({ pizza, onClose, agregarAlCarrito }) {
             </div>
           </div>
 
-          {/* ===== NUEVA OPCIÓN: SELECTOR DE CANTIDAD ===== */}
           <div style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <h4 style={{ color: '#fff', fontSize: '0.9rem', margin: 0 }}>🔢 Cantidad:</h4>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>

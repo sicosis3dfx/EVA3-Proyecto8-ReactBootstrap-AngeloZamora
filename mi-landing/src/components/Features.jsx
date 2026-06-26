@@ -29,19 +29,18 @@ const IMAGENES_CARRUSEL = [
 export default function Features({ agregarAlCarrito, setPizzaSeleccionada }) {
   const [categoriaActiva, setCategoriaActiva] = useState(0)
   const [fotoActiva, setFotoActiva] = useState(0)
-  const [isFading, setIsFading] = useState(false) // Estado para el efecto de suavizado
+  const [isFading, setIsFading] = useState(false)
   
   const [formData, setFormData] = useState({ nombre: '', personas: '2', fecha: '' })
   const [error, setError] = useState('')
   const [exito, setExito] = useState(false)
 
-  // Función con efecto de difuminado (Fade) controlado por milisegundos
   const cambiarImagenConEfecto = (nuevoIndice) => {
-    setIsFading(true) // Apagamos la imagen
+    setIsFading(true)
     setTimeout(() => {
       setFotoActiva(nuevoIndice)
-      setIsFading(false) // Encendemos la nueva imagen con transición
-    }, 250) // Tiempo del difuminado
+      setIsFading(false)
+    }, 250)
   }
 
   const siguienteFoto = () => {
@@ -54,7 +53,6 @@ export default function Features({ agregarAlCarrito, setPizzaSeleccionada }) {
     cambiarImagenConEfecto(anterior)
   }
 
-  // Carrusel automático que avanza solito cada 4 segundos
   useEffect(() => {
     const intervalo = setInterval(() => {
       siguienteFoto()
@@ -77,39 +75,20 @@ export default function Features({ agregarAlCarrito, setPizzaSeleccionada }) {
       return
     }
     
-    try {
-      const reservasExistentes = JSON.parse(localStorage.getItem('reservas_pizzeria')) || []
-      const nuevaReserva = {
-        nombre: formData.nombre.trim(),
-        fecha: formData.fecha,
-        personas: formData.personas,
-        id: Date.now()
-      }
-      
-      const listaActualizada = [...reservasExistentes, nuevaReserva]
-      localStorage.setItem('reservas_pizzeria', JSON.stringify(listaActualizada))
-      
-      setError('')
-      setExito(true)
-      setFormData({ nombre: '', personas: '2', fecha: '' })
-    } catch (err) {
-      setError('Ocurrió un error al intentar guardar tu reserva.')
-      setExito(false)
-    }
+    setError('')
+    setExito(true)
+    setFormData({ nombre: '', personas: '2', fecha: '' })
   }
 
   return (
     <section id='features' className='features'>
       <div className='features-container'>
         
-        {/* ===== GALERÍA INTERACTIVA BLINDADA CON ESTILOS INLINE ===== */}
         <p className='section-eyebrow'>Galería Artesanal</p>
         <h2 className='section-title' style={{ marginBottom: '2rem' }}>Nuestras Especialidades en el Horno</h2>
         
-        {/* Contenedor relativo del carrusel */}
         <div style={{ position: 'relative', maxWidth: '650px', margin: '0 auto', borderRadius: '14px', overflow: 'hidden', boxShadow: '0 20px 40px rgba(0, 0, 0, 0.6)' }}>
           
-          {/* BOTÓN IZQUIERDO: Forzado matemáticamente a la izquierda usando texto Unicode puro */}
           <button 
             type="button" 
             onClick={anteriorFoto} 
@@ -120,7 +99,6 @@ export default function Features({ agregarAlCarrito, setPizzaSeleccionada }) {
             &#10094;
           </button>
           
-          {/* Slider contenedor de la imagen */}
           <div style={{ width: '100%', height: '350px', background: '#0b0a0a' }}>
             <img 
               src={IMAGENES_CARRUSEL[fotoActiva]} 
@@ -129,7 +107,6 @@ export default function Features({ agregarAlCarrito, setPizzaSeleccionada }) {
             />
           </div>
           
-          {/* BOTÓN DERECHO: Forzado matemáticamente a la derecha usando texto Unicode puro */}
           <button 
             type="button" 
             onClick={siguienteFoto} 
@@ -140,7 +117,6 @@ export default function Features({ agregarAlCarrito, setPizzaSeleccionada }) {
             &#10095;
           </button>
           
-          {/* PUNTITOS DE SELECCIÓN INFERIORES */}
           <div style={{ position: 'absolute', bottom: '16px', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '0.6rem', zIndex: 10, background: 'rgba(0, 0, 0, 0.5)', backdropFilter: 'blur(6px)', padding: '0.45rem 0.9rem', borderRadius: '20px' }}>
             {IMAGENES_CARRUSEL.map((_, idx) => (
               <span 
@@ -157,7 +133,6 @@ export default function Features({ agregarAlCarrito, setPizzaSeleccionada }) {
           <h2 className='section-title'>Elige tu Pizza Favorita</h2>
         </div>
 
-        {/* ===== ACORDEÓN DE CATEGORÍAS ===== */}
         <div className="accordion-wrapper">
           {MENU_PIZZAS.map((item, index) => {
             const estaAbierto = categoriaActiva === index
@@ -183,7 +158,7 @@ export default function Features({ agregarAlCarrito, setPizzaSeleccionada }) {
                           
                           <div className="pizza-card-actions">
                             <button className="btn-pizza-primary" style={{width: '100%'}} onClick={() => setPizzaSeleccionada(pizza)}>
-                              Configurar y Añadir 🛒
+                              Seleccionar y Añadir 🛒
                             </button>
                           </div>
                         </div>
@@ -196,7 +171,6 @@ export default function Features({ agregarAlCarrito, setPizzaSeleccionada }) {
           })}
         </div>
 
-        {/* ===== FORMULARIO DE RESERVAS ===== */}
         <div style={{ marginTop: '5rem', maxWidth: '500px', marginLeft: 'auto', marginRight: 'auto', padding: '2rem', background: 'var(--card-bg)', border: '1px solid var(--border)', borderRadius: '12px' }}>
           <p className='section-eyebrow'>Planifica tu Visita</p>
           <h3 style={{ color: '#fff', fontSize: '1.5rem', marginBottom: '1.5rem', fontWeight: '800' }}>📅 Reserva tu Mesa en Vivo</h3>

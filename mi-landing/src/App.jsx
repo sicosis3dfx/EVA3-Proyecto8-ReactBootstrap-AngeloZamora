@@ -12,9 +12,7 @@ export default function App() {
   const [verCarrito, setVerCarrito] = useState(false)
   const [notificacionReserva, setNotificacionReserva] = useState(null)
 
-  // Modificado para recibir el objeto configurado desde el modal
   const agregarAlCarrito = (nuevaPizzaConfigurada) => {
-    // Si ya existe la misma pizza con el mismo tamaño, sumamos la cantidad
     const existe = carrito.find(
       item => item.id === nuevaPizzaConfigurada.id && item.tamano === nuevaPizzaConfigurada.tamano
     )
@@ -34,11 +32,9 @@ export default function App() {
     setCarrito(carrito.filter((_, index) => index !== indiceAEliminar))
   }
 
-  // Calcula el total multiplicando el precio numérico por la cantidad elegida
   const calcularTotal = () => {
     const suma = carrito.reduce((acumulado, item) => {
       const precioBase = parseInt(item.precio.replace('$', '').replaceAll('.', ''), 10)
-      // Ajuste de precio por tamaño: Familiar suma $3.000 pesos chilenos
       const precioFinalUnidad = item.tamano === 'Familiar' ? precioBase + 3000 : precioBase
       return acumulado + (precioFinalUnidad * item.cantidad)
     }, 0)
@@ -78,7 +74,6 @@ export default function App() {
         agregarAlCarrito={agregarAlCarrito}
       />
 
-      {/* MODAL DEL CARRITO ACTUALIZADO */}
       {verCarrito && (
         <div className="modal-overlay" onClick={() => setVerCarrito(false)}>
           <div className="modal-content-custom" onClick={(e) => e.stopPropagation()}>
