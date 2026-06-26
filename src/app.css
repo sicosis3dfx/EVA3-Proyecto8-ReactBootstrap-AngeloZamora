@@ -1,5 +1,5 @@
 :root {
-  /* ===== NUEVA PALETA ARTESANAL ITALIANA ===== */
+  /* ===== PALETA ARTESANAL ITALIANA ===== */
   --bg:      #111116;       /* Negro carbón profundo (base de piedra) */
   --bg2:     #1c1917;      /* Tierra/Ladrillo refractario oscuro */
   --accent:  #22c55e;      /* Verde Albahaca fresco */
@@ -47,7 +47,7 @@ body {
 }
 
 .navbar-logo span {
-  color: var(--accent); /* Cambia a Verde Albahaca */
+  color: var(--accent); 
 }
 
 .navbar-links {
@@ -71,7 +71,7 @@ body {
 }
 
 .navbar-cta {
-  background: var(--accent2); /* Botón de pedido ahora en Rojo Pomodoro */
+  background: var(--accent2); 
   color: #fff !important;
   padding: 0.45rem 1.1rem;
   border-radius: 6px;
@@ -126,14 +126,13 @@ body {
   .hamburger { display: flex; }
 }
 
-/* ===== HERO (ACTUALIZADO: NUEVA FUENTE Y TAMAÑO MAS GRANDE) ===== */
+/* ===== HERO (ACTUALIZADO: FUENTE GORDITA EXTRA BOLD) ===== */
 .hero {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 6rem 1.5rem 4rem;
-  /* Degradados de fondo adaptados a la paleta italiana */
   background:
     radial-gradient(ellipse 80% 60% at 50% 0%, rgba(34, 197, 94, 0.08), transparent),
     radial-gradient(ellipse 60% 40% at 80% 80%, rgba(239, 68, 68, 0.06), transparent),
@@ -142,7 +141,7 @@ body {
 }
 
 .hero-content {
-  max-width: 900px; /* Ampliado para dar espacio al título más grande */
+  max-width: 900px;
 }
 
 .hero-eyebrow {
@@ -160,18 +159,18 @@ body {
 }
 
 .hero-title {
-  /* CAMBIO: Fuente Georgia con look tradicional y tamaño aumentado (clamp ampliado) */
-  font-family: 'Georgia', 'Times New Roman', serif;
-  font-size: clamp(2.6rem, 7vw, 4.8rem); 
-  font-weight: 900;
-  line-height: 1.15;
-  letter-spacing: -1px;
+  /* CAMBIO: Fuente ultra robusta y pesada ('Arial Black') con tamaño gigante e imponente */
+  font-family: 'Arial Black', 'Arial Bold', Gadget, sans-serif;
+  font-size: clamp(2.5rem, 7.5vw, 4.8rem); 
+  font-weight: 950;
+  line-height: 1.1;
+  letter-spacing: -2px; /* Junta las letras un pelo para que se vea más compacto y estético */
   color: #fff;
   margin-bottom: 1.6rem;
 }
 
 .hero-title span {
-  color: var(--accent2); /* Cambia el énfasis central a Rojo Pomodoro */
+  color: var(--accent2); 
 }
 
 .hero-subtitle {
@@ -189,7 +188,7 @@ body {
 }
 
 .btn-primary {
-  background: var(--accent2); /* Botón principal en Rojo */
+  background: var(--accent2); 
   color: #fff;
   padding: 0.8rem 2rem;
   border-radius: 8px;
@@ -219,7 +218,7 @@ body {
 }
 
 .btn-secondary:hover {
-  border-color: var(--accent); /* Bordes resaltan en verde albahaca */
+  border-color: var(--accent); 
   color: var(--accent);
   transform: translateY(-2px);
 }
