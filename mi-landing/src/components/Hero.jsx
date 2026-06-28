@@ -41,15 +41,30 @@ export default function Hero() {
 
         <div style={{ margin: '1.5rem 0', display: 'flex', justifyContent: 'center' }}>
           <img 
-            src="/img/Pizza.gif" 
+            src="/img/pizza.gif" 
             alt="Pizza Animada Local" 
-            style={{ width: '180px', height: '180px', objectFit: 'contain' }}
+            style={{ width: '280px', height: '280px', objectFit: 'contain' }}
           />
         </div>
 
-        <p className='hero-subtitle'>
+        <p 
+          className='hero-subtitle'
+          style={{
+            maxWidth: '620px',
+            margin: '0 auto 2.5rem',
+            fontSize: '1.15rem',
+            color: '#e2e8f0',
+            lineHeight: '1.6',
+            background: 'rgba(11, 11, 15, 0.55)',
+            border: '1px solid var(--accent)',
+            padding: '1rem 1.5rem',
+            borderRadius: '8px',
+            boxShadow: '0 8px 24px rgba(34, 197, 94, 0.05)'
+          }}
+        >
           Disfruta de la verdadera tradición napolitana con ingredientes 100% seleccionados y masa madre madurada por 48 horas.
         </p>
+
         <div className='hero-actions'>
           <a 
             href='https://youtu.be/HUll5SnavOw' 
