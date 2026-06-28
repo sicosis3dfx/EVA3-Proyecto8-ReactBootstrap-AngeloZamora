@@ -2,11 +2,51 @@ export default function Hero() {
   return (
     <section id='hero' className='hero'>
       <div className='hero-content'>
-        <p className='hero-eyebrow'>Bienvenido a PizzaItalia</p>
+        
+        <div 
+          style={{ 
+            display: 'inline-block',
+            background: '#16161a',
+            border: '3px solid transparent',
+            borderImage: 'linear-gradient(to right, #22c55e 33%, #f5f5f4 33% 66%, #ef4444 66%) 1',
+            padding: '0.6rem 1.8rem', 
+            marginBottom: '2.2rem',
+            boxShadow: '0 10px 30px rgba(0,0,0,0.5)'
+          }}
+        >
+          <span 
+            className='hero-eyebrow' 
+            style={{ 
+              fontSize: '0.8rem',
+              fontWeight: '900',
+              letterSpacing: '0.25em',
+              color: '#fff', 
+              background: 'none',
+              border: 'none',
+              padding: 0,
+              margin: 0,
+              borderRadius: 0,
+              display: 'block',
+              textTransform: 'uppercase'
+            }}
+          >
+            BIENVENIDO A PIZZAITALIA
+          </span>
+        </div>
+
         <h1 className='hero-title'>
           Auténtica Pizza <br />
-          <span>Artesanal a la Piedra 🍕 </span>
+          <span>Artesanal a la Piedra</span>
         </h1>
+
+        <div style={{ margin: '1.5rem 0', display: 'flex', justifyContent: 'center' }}>
+          <img 
+            src="/img/Pizza.gif" 
+            alt="Pizza Animada Local" 
+            style={{ width: '180px', height: '180px', objectFit: 'contain' }}
+          />
+        </div>
+
         <p className='hero-subtitle'>
           Disfruta de la verdadera tradición napolitana con ingredientes 100% seleccionados y masa madre madurada por 48 horas.
         </p>
