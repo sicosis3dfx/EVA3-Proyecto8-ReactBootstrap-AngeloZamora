@@ -31,7 +31,7 @@ export default function Features({ agregarAlCarrito, setPizzaSeleccionada }) {
   const [fotoActiva, setFotoActiva] = useState(0)
   const [isFading, setIsFading] = useState(false)
   
-  const [formData, setFormData] = useState({ nombre: '', personas: '2', fecha: '', hora: '', telefono: '' })
+  const [formData, setFormData] = useState({ nombre: '', correo: '', personas: '2', fecha: '', hora: '', telefono: '' })
   const [error, setError] = useState('')
   const [exito, setExito] = useState(false)
 
@@ -62,22 +62,29 @@ export default function Features({ agregarAlCarrito, setPizzaSeleccionada }) {
 
   const handleReserva = (e) => {
     e.preventDefault()
-    if (!formData.nombre.trim() || !formData.fecha || !formData.hora || !formData.telefono.trim()) {
+    if (!formData.nombre.trim() || !formData.correo.trim() || !formData.fecha || !formData.hora || !formData.telefono.trim()) {
       setError('Por favor, completa todos los campos obligatorios (*).')
+      setExito(false)
+      return
+    }
+
+    const reglaCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!reglaCorreo.test(formData.correo.trim())) {
+      setError('Por favor, ingresa un correo electrónico válido (ej: usuario@correo.com).')
       setExito(false)
       return
     }
 
     const reglaTelefono = /^\d{9}$/
     if (!reglaTelefono.test(formData.telefono.trim())) {
-      setError('El teléfono debe contener exactamente los 9 dígitos numéricos (ej: 9XXXXXXXX).')
+      setError('El teléfono debe contener exactamente los 9 dígitos numéricos (ej: 9xxxxxxxx).')
       setExito(false)
       return
     }
     
     setError('')
     setExito(true)
-    setFormData({ nombre: '', personas: '2', fecha: '', hora: '', telefono: '' })
+    setFormData({ nombre: '', correo: '', personas: '2', fecha: '', hora: '', telefono: '' })
   }
 
   return (
@@ -184,11 +191,19 @@ export default function Features({ agregarAlCarrito, setPizzaSeleccionada }) {
               className="form-input"
             />
 
+            <input 
+              type="text" 
+              placeholder="Correo Electrónico *" 
+              value={formData.correo}
+              onChange={(e) => setFormData({...formData, correo: e.target.value})}
+              className="form-input"
+            />
+
             <div style={{ display: 'flex', alignItems: 'center', background: '#111116', border: '1px solid var(--border)', borderRadius: '6px', paddingLeft: '0.8rem', boxSizing: 'border-box' }}>
               <span style={{ color: 'var(--muted)', fontSize: '0.88rem', userSelect: 'none', paddingRight: '0.2rem' }}>+56</span>
               <input 
                 type="text" 
-                placeholder="9XXXXXXXX *" 
+                placeholder="9xxxxxxxx *" 
                 value={formData.telefono}
                 onChange={(e) => setFormData({...formData, telefono: e.target.value})}
                 className="form-input"
