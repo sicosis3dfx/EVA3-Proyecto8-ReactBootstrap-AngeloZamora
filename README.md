@@ -7,7 +7,7 @@ Proyecto para la asignatura de **Programación Front End** (Evaluación 3).
 * **Catálogo Dinámico:** Menú organizado mediante un acordeón interactivo de categorías.
 * **Modal de Configuración:** Permite seleccionar el tamaño de la pizza, la cantidad y calcular automáticamente el subtotal en pesos chilenos.
 * **Carrito de Compras:** Gestiona las órdenes agrupando productos idénticos y actualizando el total en tiempo real.
-* **Formulario de Reservas:** Sistema con validación interactiva que controla campos obligatorios, formato de teléfono móvil y correo electrónico en tiempo real.
+* **Formulario de Reservas:** Sistema con validación interactiva en tiempo real que controla campos obligatorios, formato chileno de teléfono móvil, correo electrónico, bloqueo automático de fechas pasadas y restricción estricta de atención (10:30 am a 19:30 pm de lunes a sábado)
 * **Carrusel Artesanal:** Galería interactiva con transiciones suaves (*fade effect*) e imágenes almacenadas localmente.
 * **Diseño 100% Responsivo:** Adaptado para dispositivos móviles, tablets y equipos de escritorio sin utilizar frameworks CSS externos.
 
