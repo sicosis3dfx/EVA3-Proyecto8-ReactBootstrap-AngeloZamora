@@ -11,9 +11,7 @@ Proyecto para la asignatura de **Programación Front End** (Evaluación 3).
 * **Carrusel Artesanal:** Galería interactiva con transiciones suaves (*fade effect*) e imágenes almacenadas localmente.
 * **Diseño 100% Responsivo:** Adaptado para dispositivos móviles, tablets y equipos de escritorio sin utilizar frameworks CSS externos.
 
-## 🛠️ Instalación y Uso Local
-
-Este proyecto utiliza **pnpm** como gestor de paquetes.
+## 🚀 Ejecutar el Proyecto
 
 ### 1. Clonar el repositorio
 
@@ -21,7 +19,15 @@ Este proyecto utiliza **pnpm** como gestor de paquetes.
 git clone https://github.com/sicosis3dfx/EVA3-Proyecto8-ReactBootstrap-AngeloZamora.git
 ```
 
-### 2. Ingresar al directorio del proyecto
+### 2. Ingresar a la carpeta del proyecto
+
+En Linux/macOS:
+
+```bash
+cd EVA3-Proyecto8-ReactBootstrap-AngeloZamora/mi-landing
+```
+
+En Windows:
 
 ```bash
 cd EVA3-Proyecto8-ReactBootstrap-AngeloZamora\mi-landing
@@ -33,11 +39,22 @@ cd EVA3-Proyecto8-ReactBootstrap-AngeloZamora\mi-landing
 pnpm install
 ```
 
-### 4. Iniciar el servidor de desarrollo
+### 4. Ejecutar el proyecto
 
 ```bash
 pnpm dev
 ```
+
+Una vez iniciado, Vite mostrará una dirección similar a:
+
+```text
+http://localhost:5173
+```
+
+Abre esa dirección en tu navegador.
+
+---
+
 
 
 ## 👨‍💻 Detalles de la Entrega
@@ -49,9 +66,11 @@ pnpm dev
 
 ## 🧰 Tecnologías Utilizadas
 
-* React 19
-* Vite
-* JavaScript (ES6+)
-* CSS Nativo
-* pnpm
+- React 19
+- Vite
+- JavaScript (ES6+)
+- CSS Nativo
+- Node.js
+- npm
+- pnpm
 
