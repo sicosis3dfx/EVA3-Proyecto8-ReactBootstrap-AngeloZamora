@@ -11,7 +11,45 @@ Proyecto para la asignatura de **Programación Front End** (Evaluación 3).
 * **Carrusel Artesanal:** Galería interactiva con transiciones suaves (*fade effect*) e imágenes almacenadas localmente.
 * **Diseño 100% Responsivo:** Adaptado para dispositivos móviles, tablets y equipos de escritorio sin utilizar frameworks CSS externos.
 
-## 🚀 Ejecutar el Proyecto
+# 🛠️ Instalación y Uso Local
+
+## 📋 Requisitos Previos
+
+Antes de ejecutar el proyecto es necesario tener instalado:
+
+- **Node.js LTS** (incluye npm)
+- **pnpm**
+
+### 1. Instalar Node.js (solo si no está instalado)
+
+En Windows puedes instalarlo mediante **winget**:
+
+```bash
+winget install OpenJS.NodeJS.LTS
+```
+
+Verificar la instalación:
+
+```bash
+node --version
+npm --version
+```
+
+### 2. Instalar pnpm
+
+```bash
+npm install -g pnpm
+```
+
+Verificar la instalación:
+
+```bash
+pnpm --version
+```
+
+---
+
+## ⚙️ Ejecutar el Proyecto
 
 ### 1. Clonar el repositorio
 
@@ -20,12 +58,6 @@ git clone https://github.com/sicosis3dfx/EVA3-Proyecto8-ReactBootstrap-AngeloZam
 ```
 
 ### 2. Ingresar a la carpeta del proyecto
-
-En Linux/macOS:
-
-```bash
-cd EVA3-Proyecto8-ReactBootstrap-AngeloZamora/mi-landing
-```
 
 En Windows:
 
@@ -52,9 +84,6 @@ http://localhost:5173
 ```
 
 Abre esa dirección en tu navegador.
-
----
-
 
 
 ## 👨‍💻 Detalles de la Entrega
