@@ -62,7 +62,7 @@ git clone https://github.com/sicosis3dfx/EVA3-Proyecto8-ReactBootstrap-AngeloZam
 En Windows:
 
 ```bash
-cd EVA3-Proyecto8-ReactBootstrap-AngeloZamora\mi-landing
+cd mi-landing
 ```
 
 ### 3. Instalar las dependencias

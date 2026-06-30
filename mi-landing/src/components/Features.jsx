@@ -35,6 +35,8 @@ export default function Features({ agregarAlCarrito, setPizzaSeleccionada }) {
   const [error, setError] = useState('')
   const [exito, setExito] = useState(false)
 
+  const hoy = new Date().toISOString().split('T')[0]
+
   const cambiarImagenConEfecto = (nuevoIndice) => {
     setIsFading(true)
     setTimeout(() => {
@@ -68,6 +70,21 @@ export default function Features({ agregarAlCarrito, setPizzaSeleccionada }) {
       return
     }
 
+    const fechaSeleccionada = new Date(formData.fecha + 'T00:00:00')
+    const diaSemana = fechaSeleccionada.getDay()
+    if (diaSemana === 0) {
+      setError('PizzaItalia permanece cerrado los domingos. Por favor, selecciona un día de lunes a sábado.')
+      setExito(false)
+      return
+    }
+
+    const horaSeleccionada = formData.hora
+    if (horaSeleccionada < "10:30" || horaSeleccionada > "19:30") {
+      setError('La hora de reserva debe ser de 10:30 a 19:30 Hrs.')
+      setExito(false)
+      return
+    }
+
     const reglaCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!reglaCorreo.test(formData.correo.trim())) {
       setError('Por favor, ingresa un correo electrónico válido (ej: usuario@correo.com).')
@@ -77,7 +94,7 @@ export default function Features({ agregarAlCarrito, setPizzaSeleccionada }) {
 
     const reglaTelefono = /^\d{9}$/
     if (!reglaTelefono.test(formData.telefono.trim())) {
-      setError('El teléfono debe contener exactamente los 9 dígitos numéricos (ej: 9xxxxxxxx).')
+      setError('El teléfono debe contener exactamente los 9 dígitos numéricos (ej: 9XXXXXXXX).')
       setExito(false)
       return
     }
@@ -203,7 +220,7 @@ export default function Features({ agregarAlCarrito, setPizzaSeleccionada }) {
               <span style={{ color: 'var(--muted)', fontSize: '0.88rem', userSelect: 'none', paddingRight: '0.2rem' }}>+56</span>
               <input 
                 type="text" 
-                placeholder="9xxxxxxxx *" 
+                placeholder="9XXXXXXXX *" 
                 value={formData.telefono}
                 onChange={(e) => setFormData({...formData, telefono: e.target.value})}
                 className="form-input"
@@ -215,6 +232,7 @@ export default function Features({ agregarAlCarrito, setPizzaSeleccionada }) {
             <div style={{ display: 'flex', gap: '0.6rem' }}>
               <input 
                 type="date" 
+                min={hoy}
                 value={formData.fecha}
                 onChange={(e) => setFormData({...formData, fecha: e.target.value})}
                 className="form-input"

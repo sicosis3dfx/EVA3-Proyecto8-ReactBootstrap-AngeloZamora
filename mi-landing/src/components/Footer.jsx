@@ -20,9 +20,10 @@ export default function Footer() {
 
         <div className='footer-links'>
           <h4>🕒 Horarios</h4>
-          <p>Martes a Jueves: 12:30 a 22:00 hrs</p>
-          <p>Viernes y Sábado: 12:30 a 23:30 hrs</p>
-          <p>Domingo: 12:30 a 21:00 hrs</p>
+          <p>Lunes a Jueves: 10:00 a 21:00 hrs</p>
+          <p>Viernes y Sábado: 10:00 a 23:00 hrs</p>
+          <p>Reservas desde las 10:30 a 19:30 hrs</p>
+          <p>Domingo: Cerrado</p>
         </div>
       </div>
 
