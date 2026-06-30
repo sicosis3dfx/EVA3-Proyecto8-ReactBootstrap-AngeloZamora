@@ -41,7 +41,7 @@ export default function Hero() {
 
         <div style={{ margin: '1.5rem 0', display: 'flex', justifyContent: 'center' }}>
           <img 
-            src="/img/pizza.gif" 
+            src="/img/pizza-yumi.gif" 
             alt="Pizza Animada Local" 
             style={{ width: '280px', height: '280px', objectFit: 'contain' }}
           />
