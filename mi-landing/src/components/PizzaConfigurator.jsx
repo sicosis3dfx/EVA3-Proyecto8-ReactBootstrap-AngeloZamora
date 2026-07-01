@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-export default function PizzaModal({ pizza, onClose, agregarAlCarrito }) {
+export default function PizzaConfigurator({ pizza, onClose, agregarAlCarrito }) {
   const [tamano, setTamano] = useState('Mediana')
   const [cantidad, setCantidad] = useState(1)
 

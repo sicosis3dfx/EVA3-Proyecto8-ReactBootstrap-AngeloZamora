@@ -3,7 +3,7 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Features from './components/Features'
 import Footer from './components/Footer'
-import PizzaModal from './components/PizzaModal'
+import PizzaConfigurator from './components/PizzaConfigurator'
 import './App.css'
 
 export default function App() {
@@ -89,7 +89,7 @@ export default function App() {
       
       <Footer />
 
-      <PizzaModal 
+      <PizzaConfigurator 
         pizza={pizzaSeleccionada} 
         onClose={() => setPizzaSeleccionada(null)} 
         agregarAlCarrito={agregarAlCarrito}

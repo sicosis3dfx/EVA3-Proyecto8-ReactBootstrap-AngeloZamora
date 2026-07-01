@@ -265,7 +265,7 @@ export default function Features({ agregarAlCarrito, setPizzaSeleccionada }) {
             </select>
 
             {error && <p className="msg-error" style={{ marginTop: '0.5rem' }}>{error}</p>}
-            {exito && <p className="msg-success" style={{ marginTop: '0.5rem', fontSize: '1rem', fontWeight: '700' }}>¡Mesa reservada con éxito! 🎉 Un correo de confirmación de su cupo ha sido enviado.</p>}
+            {exito && <p className="msg-success" style={{ marginTop: '0.5rem', fontSize: '1rem', fontWeight: '700' }}>¡Mesa reservada con éxito! 🎉 Un correo de confirmación será enviado a su Email registrado.</p>}
 
             <button type="submit" className="btn-primary" style={{ width: '100%', marginTop: '0.75rem' }}>
               Confirmar Reserva
