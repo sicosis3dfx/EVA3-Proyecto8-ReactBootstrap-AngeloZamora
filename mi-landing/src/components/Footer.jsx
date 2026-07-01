@@ -13,7 +13,7 @@ export default function Footer() {
 
         <div className='footer-links'>
           <h4>📍 Ubicación</h4>
-          <p>Av. Condell 1234, Renca</p>
+          <p>Av. Condell 4321, Renca</p>
           <p>Santiago, Chile</p>
           <p>Contacto: contacto@pizzaitalia.cl</p>
         </div>
