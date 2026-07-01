@@ -154,8 +154,7 @@ export default function Features({ agregarAlCarrito, setPizzaSeleccionada }) {
 
         <div style={{ marginTop: '2rem'}}>
           <p className='section-eyebrow'>Nuestro Menú Artesanal</p>
-          <h2 className='section-title'>Elige tu Pizza Favorita</h2>
-          <h2 className='section-title'>👇</h2>
+          <h2 className='section-title'>👇 Elige tu Pizza 👇</h2>
         </div>
 
         <div className="accordion-wrapper">

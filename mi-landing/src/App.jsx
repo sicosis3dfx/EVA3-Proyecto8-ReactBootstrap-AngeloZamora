@@ -62,7 +62,7 @@ export default function App() {
     }
 
     setErrorCarrito('')
-    alert(`¡Tu pedido por un total de ${calcularTotal()} ha sido recibido! Nos contactaremos al +56${telefonoCarrito}. Pronto estará en el horno. 🍕`)
+    alert(`¡Tu pedido por un total de ${calcularTotal()} Pronto estará en el horno 🎉. Nos contactaremos al +56${telefonoCarrito} 👌. `)
     setCarrito([])
     setTelefonoCarrito('')
     setVerCarrito(false)
