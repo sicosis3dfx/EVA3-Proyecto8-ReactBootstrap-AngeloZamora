@@ -179,7 +179,7 @@ export default function Features({ agregarAlCarrito, setPizzaSeleccionada }) {
                             <img 
                               src={pizza.img} 
                               alt={pizza.nombre} 
-                              style={{ width: '350px', height: '350px', objectFit: 'contain' }} 
+                              style={{ width: '280px', height: '280px', objectFit: 'contain' }} 
                             />
                           </div>
                           <h3>{pizza.nombre}</h3>
