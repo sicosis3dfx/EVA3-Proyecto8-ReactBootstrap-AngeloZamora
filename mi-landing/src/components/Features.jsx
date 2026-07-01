@@ -4,15 +4,15 @@ const MENU_PIZZAS = [
   {
     categoria: "Tradicionales",
     pizzas: [
-      { id: 1, nombre: "Margherita", precio: "$8.990", desc: "Salsa de tomates artesanales, mozzarella fresca, albahaca y aceite de oliva virgen.", icon: "🍕" },
-      { id: 2, nombre: "Pepperoni", precio: "$9.990", desc: "Doble porción de pepperoni premium americano combinado con queso mozzarella fundido.", icon: "🥓" }
+      { id: 1, nombre: "Margherita", precio: "$8.990", desc: "Salsa de tomates artesanales, mozzarella fresca, albahaca y aceite de oliva virgen.", img: "/img/Margherita.png" },
+      { id: 2, nombre: "Pepperoni", precio: "$9.990", desc: "Doble porción de pepperoni premium americano combinado con queso mozzarella fundido.", img: "/img/Pepperoni.png" }
     ]
   },
   {
     categoria: "Especialidades",
     pizzas: [
-      { id: 3, nombre: "PizzaItalia Suprema", precio: "$11.990", desc: "Jamón serrano, rúcula fresca, lascas de parmesano madurado y reducción de balsámico.", icon: "👨‍🍳" },
-      { id: 4, nombre: "Cuatro Quesos", precio: "$10.990", desc: "Mezcla perfecta de Mozzarella, Gorgonzola, Parmesano y Ricotta cremosa.", icon: "🧀" }
+      { id: 3, nombre: "PizzaItalia Suprema", precio: "$11.990", desc: "Jamón serrano, rúcula fresca, lascas de parmesano madurado y reducción de balsámico.", img: "/img/PizzaItaliaSuprema.png" },
+      { id: 4, nombre: "Cuatro Quesos", precio: "$10.990", desc: "Mezcla perfecta de Mozzarella, Gorgonzola, Parmesano y Ricotta cremosa.", img: "/img/CuatroQuesos.png" }
     ]
   }
 ]
@@ -175,7 +175,13 @@ export default function Features({ agregarAlCarrito, setPizzaSeleccionada }) {
                     <div className='features-grid'>
                       {item.pizzas.map((pizza) => (
                         <div className='feature-card' key={pizza.id}>
-                          <div className='feature-icon'>{pizza.icon}</div>
+                          <div className='feature-icon' style={{ width: '100%', display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}>
+                            <img 
+                              src={pizza.img} 
+                              alt={pizza.nombre} 
+                              style={{ width: '350px', height: '350px', objectFit: 'contain' }} 
+                            />
+                          </div>
                           <h3>{pizza.nombre}</h3>
                           <p>{pizza.desc}</p>
                           <span className="pizza-price">{pizza.precio} <span style={{fontSize:'0.75rem', color:'var(--muted)', fontWeight:'normal'}}>(Mediana)</span></span>
