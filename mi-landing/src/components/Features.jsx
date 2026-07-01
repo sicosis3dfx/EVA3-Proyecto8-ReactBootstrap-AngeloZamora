@@ -152,9 +152,10 @@ export default function Features({ agregarAlCarrito, setPizzaSeleccionada }) {
           </div>
         </div>
 
-        <div style={{ marginTop: '5rem' }}>
+        <div style={{ marginTop: '2rem'}}>
           <p className='section-eyebrow'>Nuestro Menú Artesanal</p>
           <h2 className='section-title'>Elige tu Pizza Favorita</h2>
+          <h2 className='section-title'>👇</h2>
         </div>
 
         <div className="accordion-wrapper">
@@ -179,7 +180,7 @@ export default function Features({ agregarAlCarrito, setPizzaSeleccionada }) {
                             <img 
                               src={pizza.img} 
                               alt={pizza.nombre} 
-                              style={{ width: '290px', height: '290px', objectFit: 'contain' }} 
+                              style={{ width: '240px', height: '240px', objectFit: 'contain' }} 
                             />
                           </div>
                           <h3>{pizza.nombre}</h3>
@@ -201,7 +202,7 @@ export default function Features({ agregarAlCarrito, setPizzaSeleccionada }) {
           })}
         </div>
 
-        <div style={{ marginTop: '5rem', maxWidth: '500px', marginLeft: 'auto', marginRight: 'auto', padding: '2rem', background: 'var(--card-bg)', border: '1px solid var(--border)', borderRadius: '12px' }}>
+        <div id='formulario-reserva' style={{ scrollMarginTop: '120px', marginTop: '5rem', maxWidth: '500px', marginLeft: 'auto', marginRight: 'auto', padding: '2rem', background: 'var(--card-bg)', border: '1px solid var(--border)', borderRadius: '12px' }}>
           <p className='section-eyebrow'>Planifica tu Visita</p>
           <h3 style={{ color: '#fff', fontSize: '1.5rem', marginBottom: '1.5rem', fontWeight: '800' }}>📅 Reserva tu Mesa</h3>
           

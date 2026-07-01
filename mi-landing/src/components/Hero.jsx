@@ -85,7 +85,7 @@ export default function Hero() {
           </a>
           
           <a 
-            href='#footer' 
+            href='#formulario-reserva' 
             style={{ background: 'var(--accent)', color: '#111116', padding: '0.8rem 2rem', borderRadius: '8px', fontWeight: '700', textDecoration: 'none', fontSize: '0.95rem', transition: 'background 0.2s, transform 0.15s', border: 'none', display: 'inline-block' }}
             onMouseOver={(e) => e.currentTarget.style.background = '#4ade80'}
             onMouseOut={(e) => e.currentTarget.style.background = 'var(--accent)'}
