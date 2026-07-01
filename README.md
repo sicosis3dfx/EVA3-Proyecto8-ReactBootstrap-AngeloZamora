@@ -83,8 +83,11 @@ Una vez iniciado, Vite mostrará una dirección similar a:
 http://localhost:5173
 ```
 
-Abre esa dirección en tu navegador.
+También puedes acceder directamente a:
 
+```text
+https://pizzaitalia-angelo-zamora.vercel.app/
+```
 
 ## 👨‍💻 Detalles de la Entrega
 
@@ -102,4 +105,5 @@ Abre esa dirección en tu navegador.
 - Node.js
 - npm
 - pnpm
+- vercel
 
