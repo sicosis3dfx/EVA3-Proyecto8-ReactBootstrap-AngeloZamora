@@ -35,7 +35,7 @@ export default function Hero() {
         </div>
 
         <h1 className='hero-title'>
-          Auténtica Pizza <br />
+          La Auténtica Pizza <br />
           <span>Artesanal a la Piedra</span>
         </h1>
 
