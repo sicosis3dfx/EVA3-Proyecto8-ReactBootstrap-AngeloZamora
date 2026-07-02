@@ -15,7 +15,9 @@ export default function Footer() {
           <h4>📍 Ubicación</h4>
           <p>Av. Condell 4321, Renca</p>
           <p>Santiago, Chile</p>
-          <p>Contacto: contacto@pizzaitalia.cl</p>
+          <h4>📲 Contacto</h4>
+          <p>📞 +56 9 8765 4321</p>
+          <p>📧 contacto@pizzaitalia.cl</p>
         </div>
 
         <div className='footer-links'>
