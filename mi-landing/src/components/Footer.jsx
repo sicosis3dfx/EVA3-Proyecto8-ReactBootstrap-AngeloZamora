@@ -8,7 +8,10 @@ export default function Footer() {
           <span style={{ color: '#fff' }}>Ita</span>
           <span style={{ color: 'var(--accent2)' }}>lia</span>
         </span>
-          <p>Auténtica tradición napolitana horneada a la piedra con pasión artesanal.</p>
+          <p>Auténtica tradición napolitana<br /> 
+          horneada a la piedra con pasión<br />
+          y cariño artesanal.</p>
+          
         </div>
 
         <div className='footer-links'>
