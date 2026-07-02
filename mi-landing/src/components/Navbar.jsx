@@ -28,8 +28,31 @@ export default function Navbar({ carritoCount, onCartClick }) {
           className={`hamburger ${isopen ? 'open' : ''}`} 
           onClick={() => setIsOpen(!isopen)}
           aria-label='Toggle menu'
+          style={{ position: 'relative' }}
         >
           <span /><span /><span />
+          {carritoCount > 0 && (
+            <span 
+              style={{ 
+                position: 'absolute', 
+                top: '-8px', 
+                right: '-8px', 
+                backgroundColor: '#dc3545', 
+                color: '#fff', 
+                borderRadius: '50%', 
+                fontSize: '11px', 
+                fontWeight: 'bold',
+                width: '18px', 
+                height: '18px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                zIndex: 20
+              }}
+            >
+              {carritoCount}
+            </span>
+          )}
         </button>
       </div>
 
